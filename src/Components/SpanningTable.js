@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -9,82 +9,62 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import styles from "./SpanningTable.css";
 
-const TAX_RATE = 0;
-
-const useStyles = makeStyles({
-  table: {
-    minWidth: 700
-  }
-});
-
-function ccyFormat(num) {
-  //   return `${num.toFixed(2)}`;
-}
-
-function priceRow(qty, unit) {
-  return qty * unit;
-}
-
-function createRow(img, desc, price, qty, removed) {
-  return { img, desc, price, qty, removed };
-}
-
-function subtotal(items) {
-  let sum = 0;
-  let number = items.map(({ price }) => parseInt(price.replace("$", "")));
-  let quantity = items.map(({ qty }) =>
-    parseInt(qty.props.children[0].props.value)
-  );
-  console.log(quantity);
-  for (let i = 0; i < number.length; i++) {
-    sum = sum + number[i] * quantity[i];
-  }
-  return sum;
-}
-
-const rows = [
-  createRow(
-    "img",
-    "Jet Sky1",
-    "$500",
-    <div>
-      <input type="text" value="1"></input>
-      <button>Update</button>
-    </div>,
-    "yes"
-  ),
-  createRow(
-    "img",
-    "Jet Sky2",
-    "$500",
-    <div>
-      <input type="text" value="1"></input>
-      <button>Update</button>
-    </div>,
-    "yes"
-  ),
-  createRow(
-    "img",
-    "Jet Sky3",
-    "$500",
-    <div>
-      <input type="text" value="1"></input>
-      <button>Update</button>
-    </div>,
-    "yes"
-  )
-];
-
-let removeItem = event => {
-  let quantity = rows.map(({ qty }) => parseInt(qty));
-  quantity.splice(0, 1);
-};
-
-const invoiceSubtotal = subtotal(rows);
-const invoiceTaxes = TAX_RATE * invoiceSubtotal;
-const invoiceTotal = invoiceTaxes + invoiceSubtotal;
-
 export default function SpanningTable() {
+  let rows1 = [
+    {
+      id: "1",
+      image: "img",
+      product_description: "Jet Sky1",
+      value: "$500",
+      quantity: 1
+    },
+    {
+      id: "2",
+      image: "img",
+      product_description: "Jet Sky2",
+      value: "$500",
+      quantity: 1
+    },
+    {
+      id: "3",
+      image: "img",
+      product_description: "Jet Sky3",
+      value: "$500",
+      quantity: 2
+    }
+  ];
+
+  const [rows, setRows] = useState(rows1);
+  const TAX_RATE = 0;
+
+  const useStyles = makeStyles({
+    table: {
+      minWidth: 700
+    }
+  });
+
+  function subtotal(items) {
+    let sum = 0;
+    let number = items.map(items => items.value.replace("$", ""));
+    let quantity = items.map(qty => parseInt(qty.quantity));
+    console.log(quantity);
+    for (let i = 0; i < number.length; i++) {
+      sum = sum + number[i] * quantity[i];
+    }
+
+    return sum;
+  }
+
+  let removeItem = rowId => {
+    // Array.prototype.filter returns new array
+    // so we aren't mutating state here
+    const arrayCopy = rows.filter(row => row.id !== rowId);
+    setRows(arrayCopy);
+  };
+
+  const invoiceSubtotal = subtotal(rows);
+  const invoiceTaxes = TAX_RATE * invoiceSubtotal;
+  const invoiceTotal = invoiceTaxes + invoiceSubtotal;
   const classes = useStyles();
 
   return (
@@ -125,12 +105,12 @@ export default function SpanningTable() {
             <TableBody>
               {rows.map(row => (
                 <TableRow>
-                  <TableCell>{row.img}</TableCell>
-                  <TableCell>{row.desc}</TableCell>
-                  <TableCell>{row.price}</TableCell>
-                  <TableCell>{row.qty}</TableCell>
+                  <TableCell>{row.image}</TableCell>
+                  <TableCell>{row.product_description}</TableCell>
+                  <TableCell>{row.value}</TableCell>
+                  <TableCell>{row.quantity}</TableCell>
                   <TableCell>
-                    <button onClick={removeItem}>remove</button>
+                    <button onClick={() => removeItem(row.id)}>remove</button>
                   </TableCell>
                 </TableRow>
               ))}
