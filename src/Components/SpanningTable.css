@@ -1,0 +1,37 @@
+.parentDiv {
+  width: 100%;
+  overflow: hidden;
+  margin-top: 57px;
+}
+
+.parentDiv2 {
+  float: right;
+  margin-right: -168px;
+  margin-top: -140px;
+}
+
+.CartDiv {
+}
+
+.LeftDiv {
+  width: 387px;
+  float: left;
+  height: 170px;
+}
+
+.RightDiv {
+  margin-left: 400px;
+  margin-right: 200px;
+}
+
+.CenterDiv {
+  margin-left: 499px;
+  margin-top: -3px;
+  margin-right: 359px;
+}
+
+#w3mission {
+  /* background-color: blue; */
+  margin-top: 35px;
+  width: 95%;
+}
