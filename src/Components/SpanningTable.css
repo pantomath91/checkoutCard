@@ -1,3 +1,6 @@
+body {
+  background-color: gray;
+}
 .parentDiv {
   width: 100%;
   overflow: hidden;
@@ -8,6 +11,155 @@
   float: right;
   margin-right: -168px;
   margin-top: -140px;
+}
+
+/* .align-flex-between {
+  display: flex;
+  flex-direction: row;
+  
+} */
+
+.container {
+  max-width: 960px;
+  width: 100%;
+  margin: 0 auto;
+  border: 1px solid #000;
+  padding: 0 16px;
+  box-sizing: border-box;
+}
+
+.top-header {
+  /* display: flex;
+  flex-direction: row;
+  justify-content: space-between; */
+  background-color: red;
+
+}
+
+.form-heading {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  color: #fff;
+  padding: 16px 0;
+}
+
+.page-heading {
+  font-size: 20px;
+  text-transform: uppercase;
+}
+
+.page-heading span { 
+  font-weight: bold;
+}
+
+.cart span { 
+  color: #000;
+  font-weight: bold;
+  padding: 5px;
+  background-color: #fff;
+  border-radius: 50%;
+}
+
+.below-header { 
+  color: #fff;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 50px 0;
+}
+  .your-cart { 
+    font-size: 25px;
+  }
+
+  .breadcrumb {
+    display: flex;
+    padding: 6px 12px;
+    background-color: red;
+    border-radius: 5px;
+  }
+  .breadcrumb a {
+
+  }
+
+  .txt-bold {
+    font-weight: bold;
+  }
+
+/* Bottom Bar */
+.bottom-bar { 
+  color: #fff;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: top;
+}
+
+.additional-comments,
+.delivery-info,
+.cart-total {
+  flex-grow: 0;
+  width: 260px;
+}
+
+.btn-checkout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+.btn-checkout p { 
+  color: #fff;
+}
+.btn-checkout .btn-red {
+  padding: 20px 26px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: red;
+  border: none;
+  border-radius: 6px;
+}
+
+.btn-checkout a {
+  color: #fff;
+}
+
+textarea {
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #000;
+  border: none;
+  border-radius: 5px;
+}
+
+h3 {
+  font-size: 14px;
+  font-weight: normal;
+  text-align: left;
+}
+
+p {
+  font-size: 14px;
+  text-align: left;
+  color: gray;
+}
+
+.cart-total {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-top: 10px;
+}
+.cart-table-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 6px 6px;
+  border-radius: 5px;
+}
+.table-row-dark {
+  background-color: #000;
 }
 
 .CartDiv {
@@ -34,4 +186,8 @@
   /* background-color: blue; */
   margin-top: 35px;
   width: 95%;
+}
+
+.MuiPaper-root { 
+  background-color: gray !important;
 }
