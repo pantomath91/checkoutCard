@@ -73,11 +73,10 @@ body {
 
 .breadcrumb {
   display: flex;
+  font-weight: bold;
   padding: 6px 12px;
   background-color: red;
   border-radius: 5px;
-}
-.breadcrumb a {
 }
 
 .txt-bold {
@@ -110,7 +109,7 @@ body {
   color: #fff;
 }
 .btn-checkout .btn-red {
-  padding: 20px 26px;
+  padding: 10px 10px;
   color: #fff;
   font-size: 16px;
   font-weight: bold;
@@ -125,6 +124,7 @@ body {
 
 textarea {
   width: 100%;
+  color: #fff;
   box-sizing: border-box;
   background-color: #000;
   border: none;
@@ -190,6 +190,7 @@ p {
   background-color: #0b0b0b !important;
 }
 
-.MuiTableCell-head, .MuiTableCell-body {
+.MuiTableCell-head,
+.MuiTableCell-body {
   color: #fff !important;
 }
