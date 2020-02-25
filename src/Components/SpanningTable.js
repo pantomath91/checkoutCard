@@ -47,7 +47,6 @@ export default function SpanningTable() {
     let sum = 0;
     let number = items.map(items => items.value.replace("$", ""));
     let quantity = items.map(qty => parseInt(qty.quantity));
-    console.log(quantity);
     for (let i = 0; i < number.length; i++) {
       sum = sum + number[i] * quantity[i];
     }
@@ -66,6 +65,10 @@ export default function SpanningTable() {
   const invoiceTaxes = TAX_RATE * invoiceSubtotal;
   const invoiceTotal = invoiceTaxes + invoiceSubtotal;
   const classes = useStyles();
+  let handleChange = event => {
+    console.log((event.target.value = null));
+    console.log("Sachin Abhishek");
+  };
 
   return (
     <Fragment>
@@ -95,7 +98,7 @@ export default function SpanningTable() {
         <TableContainer component={Paper}>
           <Table className={classes.table} aria-label="spanning table">
             <TableHead>
-              <TableRow className="table-row-dark">
+              <TableRow>
                 <TableCell></TableCell>
                 <TableCell>Product Name</TableCell>
                 <TableCell>Price</TableCell>
@@ -108,9 +111,12 @@ export default function SpanningTable() {
                   <TableCell>{row.image}</TableCell>
                   <TableCell>{row.product_description}</TableCell>
                   <TableCell>{row.value}</TableCell>
-                  <TableCell>{row.quantity}</TableCell>
                   <TableCell>
-                    <button onClick={() => removeItem(row.id)}>remove</button>
+                    <input type="text" value="Doe" onChange={handleChange} />
+                    <button>Update</button>
+                  </TableCell>
+                  <TableCell>
+                    <button onClick={() => removeItem(row.id)}>X</button>
                   </TableCell>
                 </TableRow>
               ))}
