@@ -35,9 +35,6 @@ export default function SpanningTable() {
   ];
 
   const [rows, setRows] = useState(state);
-  useEffect(() => {
-    console.log("object");
-  }, []);
 
   const useStyles = makeStyles({
     table: {
