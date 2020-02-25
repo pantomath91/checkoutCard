@@ -10,7 +10,8 @@ import Paper from "@material-ui/core/Paper";
 import styles from "./SpanningTable.css";
 
 export default function SpanningTable() {
-  let rows1 = [
+  
+  let state = [
     {
       id: "1",
       image: "img",
@@ -30,46 +31,48 @@ export default function SpanningTable() {
       image: "img",
       product_description: "Jet Sky3",
       value: "$500",
-      quantity: 2
+      quantity: 1
     }
   ];
 
-  const [rows, setRows] = useState(rows1);
-  const TAX_RATE = 0;
-
+  const [rows, setRows] = useState(state);
+  // const [rows, setRows] = useState(state);
   const useStyles = makeStyles({
     table: {
       minWidth: 700
     }
   });
 
-  function subtotal(items) {
+  let subtotal = rows => {
     let sum = 0;
-    let number = items.map(items => items.value.replace("$", ""));
-    let quantity = items.map(qty => parseInt(qty.quantity));
-    for (let i = 0; i < number.length; i++) {
-      sum = sum + number[i] * quantity[i];
+    let item_price_list = rows.map(row => parseInt(row.value.replace("$", "")));
+    let quantity = rows.map(row => parseInt(row.quantity));
+    for (let i = 0; i < item_price_list.length; i++) {
+      sum = sum + item_price_list[i] * quantity[i];
     }
-
+    console.log(sum);
     return sum;
   }
-
+  const TAX_RATE = 0;
+  const invoiceTaxes = TAX_RATE * subtotal(rows);
+  const invoiceTotal = invoiceTaxes + subtotal(rows);
+  const classes = useStyles();
   let removeItem = rowId => {
     // Array.prototype.filter returns new array
     // so we aren't mutating state here
     const arrayCopy = rows.filter(row => row.id !== rowId);
     setRows(arrayCopy);
   };
-
-  const invoiceSubtotal = subtotal(rows);
-  const invoiceTaxes = TAX_RATE * invoiceSubtotal;
-  const invoiceTotal = invoiceTaxes + invoiceSubtotal;
-  const classes = useStyles();
-  let handleChange = event => {
-    console.log((event.target.value = null));
-    console.log("Sachin Abhishek");
+  
+  let handleChange = (id,event) => {
+    for(let i=0;i<rows.length;i++){
+   if(rows[i].id===id){
+     rows[i].quantity=event.target.value
+    };
+  }
+  setRows(rows);
+  return subtotal(rows);
   };
-
   return (
     <Fragment>
       <div className="top-header">
@@ -98,21 +101,22 @@ export default function SpanningTable() {
         <TableContainer component={Paper}>
           <Table className={classes.table} aria-label="spanning table">
             <TableHead>
-              <TableRow>
+              <TableRow className="table-row-dark">
                 <TableCell></TableCell>
                 <TableCell>Product Name</TableCell>
                 <TableCell>Price</TableCell>
                 <TableCell>Quantity</TableCell>
+                <TableCell></TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {rows.map(row => (
-                <TableRow>
+                <TableRow key={row.id}>
                   <TableCell>{row.image}</TableCell>
                   <TableCell>{row.product_description}</TableCell>
                   <TableCell>{row.value}</TableCell>
                   <TableCell>
-                    <input type="text" value="Doe" onChange={handleChange} />
+                    <input type="text" defaultValue={row.quantity} onChange={(event) => handleChange(row.id,event)}/>
                     <button>Update</button>
                   </TableCell>
                   <TableCell>
@@ -130,8 +134,6 @@ export default function SpanningTable() {
           <div className="additional-comments">
             <h3>Adiitional Comments</h3>
             <textarea rows="6">
-              At w3schools.com you will learn how to make a website. We offer
-              free tutorials in all web development technologies.
             </textarea>
           </div>
 
@@ -146,7 +148,7 @@ export default function SpanningTable() {
           <div className="cart-total">
             <div className="cart-table-row">
               <div>Sub Total</div>
-              <div className="txt-bold">{invoiceSubtotal}</div>
+              <div className="txt-bold">{subtotal(rows)}</div>
             </div>
 
             <div className="cart-table-row">

@@ -1,4 +1,5 @@
 body {
+  /* background-color: #0b0b0b; */
   background-color: gray;
 }
 .parentDiv {
@@ -23,7 +24,6 @@ body {
   max-width: 960px;
   width: 100%;
   margin: 0 auto;
-  border: 1px solid #000;
   padding: 0 16px;
   box-sizing: border-box;
 }
@@ -32,7 +32,7 @@ body {
   /* display: flex;
   flex-direction: row;
   justify-content: space-between; */
-  background-color: red;
+  background-color: #ae0000;
 }
 
 .form-heading {
@@ -140,7 +140,7 @@ h3 {
 p {
   font-size: 14px;
   text-align: left;
-  color: white;
+  color: #a4a4a4;
 }
 
 .cart-total {
@@ -187,5 +187,9 @@ p {
 }
 
 .MuiPaper-root {
-  background-color: gray !important;
+  background-color: #0b0b0b !important;
+}
+
+.MuiTableCell-head, .MuiTableCell-body {
+  color: #fff !important;
 }
