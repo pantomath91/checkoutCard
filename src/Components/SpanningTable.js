@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -36,21 +36,23 @@ export default function SpanningTable() {
   ];
 
   const [rows, setRows] = useState(state);
-  // const [rows, setRows] = useState(state);
+  useEffect(() => {
+    console.log("object")
+  },[]);
+
   const useStyles = makeStyles({
     table: {
       minWidth: 700
     }
   });
 
-  let subtotal = rows => {
+    function subtotal(rows) {
     let sum = 0;
     let item_price_list = rows.map(row => parseInt(row.value.replace("$", "")));
     let quantity = rows.map(row => parseInt(row.quantity));
     for (let i = 0; i < item_price_list.length; i++) {
       sum = sum + item_price_list[i] * quantity[i];
     }
-    console.log(sum);
     return sum;
   }
   const TAX_RATE = 0;
@@ -65,13 +67,14 @@ export default function SpanningTable() {
   };
   
   let handleChange = (id,event) => {
-    for(let i=0;i<rows.length;i++){
-   if(rows[i].id===id){
-     rows[i].quantity=event.target.value
-    };
-  }
-  setRows(rows);
-  return subtotal(rows);
+    const newRows= [...rows]
+    console.log("hgjh")
+    for(let i=0;i<newRows.length;i++){
+      if(newRows[i].id===id){
+        newRows[i].quantity=event.target.value
+       };
+     }
+  setRows(newRows);
   };
   return (
     <Fragment>
@@ -148,7 +151,7 @@ export default function SpanningTable() {
           <div className="cart-total">
             <div className="cart-table-row">
               <div>Sub Total</div>
-              <div className="txt-bold">{subtotal(rows)}</div>
+              <div className="txt-bold">{()=> subtotal(rows)}</div>
             </div>
 
             <div className="cart-table-row">
